@@ -14,7 +14,10 @@ World::World( Orbiter **orbiters )
 {
 	log( "World::World(2)", INFO );
 
-	initiateOrbiters();
+	for ( int i = 0; i < ORBITER_COUNT; i++ )
+	{
+		_orbiters[ i ] = new Orbiter( *orbiters[ i ]);
+	}
 }
 
 World::~World()
@@ -81,7 +84,7 @@ void World::deactivateOrbiters()
 
 void World::drawActivatedOrbiters()
 {
-	log( "World::drawActivatedOrbiters()", DEBUG );
+	//log( "World::drawActivatedOrbiters()", DEBUG );
 
 	for ( int i = 0; i < ORBITER_COUNT; i++ )
 	{
