@@ -1,4 +1,5 @@
 #include "../../../inc/struct/pos3.hpp"
+#include "../../../inc/deps.hpp"
 
 pos3_s getNullPos3() { return { 0, 0, 0 }; }
 
@@ -223,9 +224,9 @@ float getCylindricalDistZ( const pos3_s &p1, const pos3_s &p2 ) { return getCyli
 
 // ================================ LIST METHODS
 
-posList listPosInRect( pos3_s const &p1, pos3_s const &p2 )
+posList3_t listPosInRect( pos3_s const &p1, pos3_s const &p2 )
 {
-	posList list;
+	posList3_t list;
 	pos3_s pos;
 
 	for ( pos.x = min( p1.x, p2.x ); pos.x <= max( p1.x, p2.x ); pos.x++ )
@@ -241,9 +242,9 @@ posList listPosInRect( pos3_s const &p1, pos3_s const &p2 )
 	return list;
 }
 
-posList listPosInCube( pos3_s const &center, float radius )
+posList3_t listPosInCube( pos3_s const &center, float radius )
 {
-	posList list;
+	posList3_t list;
 	pos3_s pos;
 
 	for ( pos.x = center.x - radius; pos.x <= center.x + radius; pos.x++ )
@@ -259,9 +260,9 @@ posList listPosInCube( pos3_s const &center, float radius )
 	return list;
 }
 
-posList listPosInSphere( pos3_s const &center, float radius )
+posList3_t listPosInSphere( pos3_s const &center, float radius )
 {
-	posList list;
+	posList3_t list;
 	pos3_s pos;
 
 	for ( pos.x = center.x - radius; pos.x <= center.x + radius; pos.x++ )

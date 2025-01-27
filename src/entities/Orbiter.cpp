@@ -10,7 +10,7 @@ Orbiter::Orbiter()
 	_isActivated = false;
 }
 
-Orbiter::Orbiter( pos2_s orbiterPos )
+Orbiter::Orbiter( Vector2 orbiterPos )
 {
 	log( "Orbiter::Orbiter(2)", DEBUG );
 
@@ -46,7 +46,7 @@ Orbiter::~Orbiter()
 // ================================ ACCESSORS
 
 World *Orbiter::getWorld() const { return ( getEngine()->getWorld()); }
-pos2_s Orbiter::getOrbiterPos() const { return _orbiterPos; }
+Vector2 Orbiter::getOrbiterPos() const { return _orbiterPos; }
 
 string Orbiter::getOrbiterPosString()
 {

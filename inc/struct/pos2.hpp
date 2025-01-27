@@ -1,7 +1,6 @@
 #ifndef POS2_HPP
 # define POS2_HPP
 
-# include "../deps.hpp"
 # include "../def/direction.hpp"
 
 typedef struct
@@ -10,8 +9,8 @@ typedef struct
 	int y;
 } pos2_s;
 
-typedef list<   pos2_s > posList ;
-typedef vector< pos2_s > posVec ;
+typedef list<   pos2_s > posList2_t ;
+typedef vector< pos2_s > posVect2_t ;
 
 pos2_s getNullPos2();
 
@@ -63,9 +62,9 @@ bool isInTirangle( pos2_s const &point, pos2_s const &p1, pos2_s const &p2, pos2
 
 // ================================ LIST METHODS
 
-posList listPosInRect( pos2_s const &p1, pos2_s const &p2 );
-posList listPosInCube( pos2_s const &center, float radius );
-posList listPosInSphere( pos2_s const &center, float radius );
+posList2_t listPosInRect( pos2_s const &p1, pos2_s const &p2 );
+posList2_t listPosInCube( pos2_s const &center, float radius );
+posList2_t listPosInSphere( pos2_s const &center, float radius );
 
 
 // ================================ COMPARISON OPERATORS

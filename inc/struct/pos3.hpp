@@ -1,7 +1,6 @@
 #ifndef POS3_HPP
 # define POS3_HPP
 
-# include "../deps.hpp"
 # include "../def/direction.hpp"
 
 typedef struct
@@ -11,8 +10,8 @@ typedef struct
 	int z;
 } pos3_s;
 
-typedef list<   pos3_s > posList ;
-typedef vector< pos3_s > posVec ;
+typedef list<   pos3_s > posList3_t ;
+typedef vector< pos3_s > posVect3_t ;
 
 pos3_s getNullPos3();
 
@@ -106,9 +105,9 @@ bool isInZConoid(   pos3_s const &point, pos3_s const &center, float radEast, fl
 
 // ================================ LIST METHODS
 
-posList listPosInRect( pos3_s const &p1, pos3_s const &p2 );
-posList listPosInCube( pos3_s const &center, float radius );
-posList listPosInSphere( pos3_s const &center, float radius );
+posList3_t listPosInRect( pos3_s const &p1, pos3_s const &p2 );
+posList3_t listPosInCube( pos3_s const &center, float radius );
+posList3_t listPosInSphere( pos3_s const &center, float radius );
 
 
 // ================================ COMPARISON OPERATORS

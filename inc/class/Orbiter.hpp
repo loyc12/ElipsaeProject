@@ -2,7 +2,6 @@
 # define ORBITER_HPP
 
 # include "../deps.hpp"
-# include "../struct/pos2.hpp"
 
 class World;
 
@@ -10,7 +9,7 @@ class Orbiter
 {
 	private:
 
-	pos2_s _orbiterPos;
+	Vector2 _orbiterPos;
 	string _posStr;
 
 	bool _isGenerated; // Whether the orbiter mesh is up to date
@@ -21,7 +20,7 @@ class Orbiter
 
 	// ================================ CONSTRUCTORS
 	Orbiter();
-	Orbiter( pos2_s orbiterPos );
+	Orbiter( Vector2 orbiterPos );
 	Orbiter( const Orbiter &other );
 	Orbiter &operator=( const Orbiter &other );
 	~Orbiter();
@@ -29,7 +28,7 @@ class Orbiter
 	// ================================ ACCESSORS
 
 	World *getWorld() const;
-	pos2_s getOrbiterPos() const;
+	Vector2 getOrbiterPos() const;
 	string getOrbiterPosString();
 	string getOrbiterPosSentence( const char* str);
 

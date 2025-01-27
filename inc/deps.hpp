@@ -3,6 +3,9 @@
 
 # include "./libs.hpp"
 
+# include "./struct/pos2.hpp"
+# include "./struct/pos3.hpp"
+
 # include "./def/blockType.hpp"
 # include "./def/clock.hpp"
 # include "./def/colour.hpp"

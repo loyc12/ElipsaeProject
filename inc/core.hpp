@@ -4,9 +4,6 @@
 # include "./libs.hpp"
 # include "./deps.hpp"
 
-
-# include "./struct/pos2.hpp"
-
 # include "./class/Orbiter.hpp"
 # include "./class/Engine.hpp"
 # include "./class/FixedPoint.hpp"

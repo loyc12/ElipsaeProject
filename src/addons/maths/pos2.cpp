@@ -1,4 +1,5 @@
 #include "../../../inc/struct/pos2.hpp"
+#include "../../../inc/deps.hpp"
 
 pos2_s getNullPos2() { return { 0, 0 }; }
 
@@ -121,9 +122,9 @@ float getCircularDist( const pos2_s &p1, const pos2_s &p2 )
 
 // ================================ LIST METHODS
 
-posList listPosInRect( pos2_s const &p1, pos2_s const &p2 )
+posList2_t listPosInRect( pos2_s const &p1, pos2_s const &p2 )
 {
-	posList list;
+	posList2_t list;
 	pos2_s pos;
 
 	for ( pos.x = min( p1.x, p2.x ); pos.x <= max( p1.x, p2.x ); pos.x++ )
@@ -136,9 +137,9 @@ posList listPosInRect( pos2_s const &p1, pos2_s const &p2 )
 	return list;
 }
 
-posList listPosInSquare( pos2_s const &center, float radius )
+posList2_t listPosInSquare( pos2_s const &center, float radius )
 {
-	posList list;
+	posList2_t list;
 	pos2_s pos;
 
 	for ( pos.x = center.x - radius; pos.x <= center.x + radius; pos.x++ )
@@ -151,9 +152,9 @@ posList listPosInSquare( pos2_s const &center, float radius )
 	return list;
 }
 
-posList listPosInCircle( pos2_s const &center, float radius )
+posList2_t listPosInCircle( pos2_s const &center, float radius )
 {
-	posList list;
+	posList2_t list;
 	pos2_s pos;
 
 	for ( pos.x = center.x - radius; pos.x <= center.x + radius; pos.x++ )

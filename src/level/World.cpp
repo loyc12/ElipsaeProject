@@ -10,20 +10,16 @@ World::World()
 	initiateOrbiters();
 }
 
-World::World( Orbiter **orbiters )
+World::World( OrbList *orbiters )
 {
 	log( "World::World(2)", INFO );
 
-	for ( int i = 0; i < ORBITER_COUNT; i++ )
-	{
-		_orbiters[ i ] = new Orbiter( *orbiters[ i ]);
-	}
+	_orbiters = *orbiters;
 }
 
 World::~World()
 {
 	log( "World::~World()", INFO );
-
 
 }
 
@@ -33,64 +29,45 @@ World::~World()
 
 // ================================ CORE METHODS
 
+void World::spawnOrbiter( Vector2 orbiterPos, Orbiter &orbiter ) { spawnOrbiter( orbiterPos.x, orbiterPos.y, orbiter ); }
+
+void World::spawnOrbiter( float x, float y, Orbiter &orbiter )
+{
+	log( "World::spawnOrbiter()", DEBUG );
+
+	// WIP
+}
+
+
 void World::initiateOrbiters()
 {
-	log( "World::initiateOrbiters()", DEBUG );
-
-	for ( int i = 0; i < ORBITER_COUNT; i++ )
-	{
-		_orbiters[ i ] = new Orbiter();
-	}
+	// WIP
 }
 
 void World::generateOrbiters()
 {
 	log( "World::generateOrbiters()", DEBUG );
 
-	for ( int i = 0; i < ORBITER_COUNT; i++ )
-	{
-		Orbiter *orb = _orbiters[ i ];
-
-		if ( orb && !orb->isGenerated() )
-		_orbiters[ i ]->generate();
-	}
+	// WIP
 }
 
 void World::activateOrbiters()
 {
 	log( "World::activateOrbiters()", DEBUG );
 
-	for ( int i = 0; i < ORBITER_COUNT; i++ )
-	{
-		Orbiter *orb = _orbiters[ i ];
-
-		if ( orb && !orb->isActivated() )
-		_orbiters[ i ]->activate();
-	}
+	// WIP
 }
 
 void World::deactivateOrbiters()
 {
 	log( "World::deactivateOrbiters()", DEBUG );
 
-	for ( int i = 0; i < ORBITER_COUNT; i++ )
-	{
-		Orbiter *orb = _orbiters[ i ];
-
-		if ( orb && orb->isActivated() )
-		_orbiters[ i ]->deactivate();
-	}
+	// WIP
 }
 
 void World::drawActivatedOrbiters()
 {
 	//log( "World::drawActivatedOrbiters()", DEBUG );
 
-	for ( int i = 0; i < ORBITER_COUNT; i++ )
-	{
-		Orbiter *orb = _orbiters[ i ];
-
-		if ( orb && orb->isActivated() )
-		_orbiters[ i ]->drawSelf();
-	}
+	// WIP
 }
