@@ -43,7 +43,10 @@ ViewPort &ViewPort::operator=( ViewPort &other )
 	return *this;
 }
 
-ViewPort::~ViewPort() {}
+ViewPort::~ViewPort()
+{
+	log( "ViewPort::~ViewPort()", DEBUG );
+}
 
 void	ViewPort::setCamera( Camera2D *camera ) { _camera = *camera; }
 void	ViewPort::setCenter( Vector2 pos ) { _center = pos; }
