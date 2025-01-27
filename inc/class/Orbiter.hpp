@@ -22,8 +22,8 @@ class Orbiter
 	// ================================ CONSTRUCTORS
 	Orbiter();
 	Orbiter( pos3_s orbiterPos );
-	Orbiter( const Orbiter &c );
-	Orbiter &operator=( const Orbiter &c );
+	Orbiter( const Orbiter &other );
+	Orbiter &operator=( const Orbiter &other );
 	~Orbiter();
 
 	// ================================ ACCESSORS

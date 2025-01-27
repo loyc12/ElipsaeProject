@@ -2,7 +2,6 @@
 # define ENGINE_HPP
 
 # include "../deps.hpp"
-# include "../gfx/draw.hpp"
 # include "./World.hpp"
 # include "./Player.hpp"
 
@@ -30,7 +29,7 @@ class Engine
 	World *getWorld();
 
 	Player *getPlayer() ;
-	Camera3D *getCamera();
+	Camera2D *getCamera();
 
 	Noise *getNoise();
 	Noise *setNoiseSeed( int64_t seed );

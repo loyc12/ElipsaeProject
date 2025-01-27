@@ -43,7 +43,7 @@ Engine::~Engine()
 World *Engine::getWorld() { return _world; }
 
 Player *Engine::getPlayer() { return _player; }
-Camera3D *Engine::getCamera() { return _player->getCamera(); }
+Camera2D *Engine::getCamera() { return _player->getCamera(); }
 
 Noise *Engine::getNoise()
 {
@@ -131,7 +131,7 @@ void Engine::inputs()
 	if ( IsKeyPressed( KEY_ENTER ) )
 		log( "Enter key pressed", INFO );
 
-	_player->update();
+	_player->updateSelf();
 }
 
 void Engine::update()

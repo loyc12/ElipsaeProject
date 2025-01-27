@@ -4,7 +4,6 @@
 # include "./libs.hpp"
 # include "./deps.hpp"
 
-# include "./gfx/draw.hpp"
 
 # include "./struct/pos3.hpp"
 
@@ -12,6 +11,7 @@
 # include "./class/Engine.hpp"
 # include "./class/FixedPoint.hpp"
 # include "./class/Player.hpp"
+# include "./class/ViewPort.hpp"
 # include "./class/World.hpp"
 
 #endif // DEPS_HPP

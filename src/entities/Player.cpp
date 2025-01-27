@@ -1,13 +1,41 @@
-# include "../../inc/class/Player.hpp"
+#include "../../inc/class/Player.hpp"
 
 Player::Player()
 {
-	log( "Player::Player()", INFO );
-	_camera.projection = CAMERA_PERSPECTIVE;
-	_camera.position = { 0.0f, 0.0f, 0.0f };
-	_camera.target = { 1.0f, 0.0f, 0.0f };
-	_camera.fovy = PLAYER_FOV;
-	_camera.up = { 0.0f, 1.0f, 0.0f };
+	log( "Player::Player(1)", INFO );
+
+	_position  = { 0, 0 };
+	_direction = { 0, 1 };
+	_velocity  = { 0, 0 };
+}
+
+Player::Player( Vector2 pos, Vector2 dir, Vector2 vel )
+{
+	log( "Player::Player(2)", INFO );
+
+	_position = pos;
+	_direction = dir;
+	_velocity = vel;
+}
+
+Player::Player( Player &other )
+{
+	_position = other.getPosition();
+	_direction = other.getDirection();
+	_velocity = other.getVelocity();
+
+	_viewPort = *other.getViewport();
+}
+
+Player &Player::operator=( Player &other )
+{
+	_position = other.getPosition();
+	_direction = other.getDirection();
+	_velocity = other.getVelocity();
+
+	_viewPort = *other.getViewport();
+
+	return *this;
 }
 
 Player::~Player()
@@ -17,66 +45,137 @@ Player::~Player()
 
 // ================================ ACCESSORS
 
-Camera3D *Player::getCamera() { return &_camera; }
+Camera2D *Player::getCamera() { return _viewPort.getCamera(); }
 
-void Player::setPosition( Vector3 pos )
-{
-	_position = pos;
-	_camera.position = _position; // NOTE : temporary
-}
-void Player::moveBy( Vector3 movement )
+void Player::setPosition( Vector2 pos ) { _position = pos; }
+void Player::setDirection( Vector2 dir ) { _direction = dir; }
+void Player::setVelocity( Vector2 vel ) { _velocity = vel; }
+
+void Player::setViewPortZoom( float zoom ) { _viewPort.setZoom( zoom ); }
+
+void Player::moveBy( Vector2 movement )
 {
 	_position.x += movement.x;
 	_position.y += movement.y;
-	_position.z += movement.z;
 
-	_camera.position = _position; // NOTE : temporary
+	updateViewPort();
 }
 
-void Player::setTarget( Vector3 target ) { _camera.target = target; }
-void Player::setDirection( Vector3 direction )
+void Player::moveTowards( Vector2 target )
 {
-	_camera.target.x = _camera.position.x + direction.x;
-	_camera.target.y = _camera.position.y + direction.y;
-	_camera.target.z = _camera.position.z + direction.z;
+	(void)target;
+	// WIP
+
+	updateViewPort();
 }
 
-
-void Player::setFOV( float fovy ) { _camera.fovy = fovy; }
-
-Vector3 Player::getPosition() const { return _position; }
-Vector3 Player::getDirection() const
+void Player::accelerateBy( Vector2 acceleration )
 {
-	return (Vector3){
-		_camera.target.x - _camera.position.x,
-		_camera.target.y - _camera.position.y,
-		_camera.target.z - _camera.position.z
-	};
+	_velocity.x += acceleration.x;
+	_velocity.y += acceleration.y;
 }
-Vector3 Player::getTarget() const { return _camera.target; }
+
+void Player::accelerateTowards( Vector2 target )
+{
+	(void)target;
+	// WIP
+}
+
+void Player::rotateBy( float angle )
+{
+	(void)angle;
+	// WIP
+}
+
+void Player::rotateTowards( Vector2 target )
+{
+	(void)target;
+	// WIP
+}
+
+Vector2 Player::getPosition()  const { return _position; }
+Vector2 Player::getDirection() const { return _direction; }
+Vector2 Player::getVelocity()  const { return _velocity; }
+
+ViewPort *Player::getViewport() { return &_viewPort; }
 
 // ================================ CORE METHODS
 
-void Player::update() // TODO : refactor this shit m8
+void Player::updatePosition()
 {
-	int run = 1;
-	if( IsKeyDown( KEY_LEFT_CONTROL )){ run = 2; }
+	_position.x += _velocity.x;
+	_position.y += _velocity.y;
 
-	UpdateCameraPro( &_camera,
-		(Vector3){
-			(IsKeyDown( KEY_W ) || IsKeyDown( KEY_UP ))	* MOVE_FACTOR * run -	// Move forward-backward
-			(IsKeyDown( KEY_S ) || IsKeyDown( KEY_DOWN ))	* MOVE_FACTOR * run,
+	updateViewPort();
+}
 
-			(IsKeyDown( KEY_D ) || IsKeyDown( KEY_RIGHT ))	* MOVE_FACTOR * run -	// Move right-left
-			(IsKeyDown( KEY_A ) || IsKeyDown( KEY_LEFT ))	* MOVE_FACTOR * run,
+void Player::updateDirection()
+{
+	// WIP
+}
 
-			(IsKeyDown( KEY_SPACE ) || IsKeyDown( KEY_RIGHT_CONTROL ))	* MOVE_FACTOR * run -	// Move up-down
-			(IsKeyDown( KEY_LEFT_SHIFT ) || IsKeyDown( KEY_KP_0 ))		* MOVE_FACTOR * run
-		},
-		( Vector3 ){
-			GetMouseDelta().x * TURN_FACTOR,	// Rotation: yaw
-			GetMouseDelta().y * TURN_FACTOR,	// Rotation: pitch
-			0.0f							// Rotation: roll
-		},
-		0.0f);	// Move to target (zoom)
+void Player::updateVelocity()
+{
+	// WIP
+}
+
+void Player::updateViewPort()
+{
+	_viewPort.setCenter( _position );
+	_viewPort.updateSelf();
+}
+
+void Player::updateSelf()
+{
+	registerInputs();
+
+	updateDirection();
+	updateVelocity();
+
+	updatePosition();
+	updateViewPort();
+}
+
+void Player::registerInputs() // TODO : refactor this shit m8
+{
+	//float rotFactor = 1.0f; // TEMP
+	float accFactor = 1.0f;
+
+	if( IsKeyDown( KEY_LEFT_CONTROL )) { accFactor *= 2; }
+	if( IsKeyDown( KEY_LEFT_SHIFT ))   { accFactor /= 4; }
+
+	if( IsKeyDown( KEY_W ) || IsKeyDown( KEY_UP ))
+	{
+		// ACCELERATE FORWARDS
+		log( "Player accelerating forwards", INFO );
+	}
+	if( IsKeyDown( KEY_S ) || IsKeyDown( KEY_DOWN ))
+	{
+		// ACCELERATE BACKWARDS
+		log( "Player accelerating backwards", INFO );
+	}
+	if( IsKeyDown( KEY_D ) || IsKeyDown( KEY_RIGHT ))
+	{
+		log( "Player turning right", INFO );
+		// TURN RIGHT
+	}
+	if( IsKeyDown( KEY_A ) || IsKeyDown( KEY_LEFT ))
+	{
+		log( "Player turning left", INFO );
+		// TURN LEFT
+	}
+
+	if( IsKeyDown( KEY_SPACE ) || IsKeyDown( KEY_ENTER ) || IsKeyDown( KEY_KP_ENTER ))
+	{
+		log( "Player slowing down", INFO );
+		// DECELERATE
+	}
+
+	if( IsKeyDown( KEY_E ) || IsKeyDown( KEY_KP_0 ))
+	{
+		log( "Player acting", INFO );
+		// INTERACT
+	}
+
+
 }

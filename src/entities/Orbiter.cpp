@@ -19,20 +19,20 @@ Orbiter::Orbiter( pos3_s orbiterPos )
 	_isActivated = false;
 }
 
-Orbiter::Orbiter( const Orbiter &c )
+Orbiter::Orbiter( const Orbiter &other )
 {
-	_orbiterPos = c.getOrbiterPos();
+	_orbiterPos = other.getOrbiterPos();
 
-	_isGenerated = c.isGenerated();
-	_isActivated = c.isActivated();
+	_isGenerated = other.isGenerated();
+	_isActivated = other.isActivated();
 }
 
-Orbiter &Orbiter::operator=( const Orbiter &c )
+Orbiter &Orbiter::operator=( const Orbiter &other )
 {
-	_orbiterPos = c.getOrbiterPos();
+	_orbiterPos = other.getOrbiterPos();
 
-	_isGenerated = c.isGenerated();
-	_isActivated = c.isActivated();
+	_isGenerated = other.isGenerated();
+	_isActivated = other.isActivated();
 
 	return *this;
 }

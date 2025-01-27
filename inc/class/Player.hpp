@@ -2,44 +2,65 @@
 # define PLAYER_HPP
 
 # include "../deps.hpp"
-#include <raylib.h>
+# include "./ViewPort.hpp"
 
-# define PLAYER_FOV 	80.0f
-# define TURN_FACTOR	0.1f
-# define MOVE_FACTOR	0.4f
 
-class Player // NOTE : put camera stuff in a Screen class instead ??
+class Player // NOTE : have it inherit from Orbiter class
 {
 	private:
 
-	Vector3 _position;
-	Camera3D _camera;
+	Vector2  _position;
+	Vector2  _direction;
+	Vector2	 _velocity;
+
+	ViewPort _viewPort;
 
 	public:
 
 	// ================================ CONSTRUCTORS
 	Player();
+	Player( Vector2 pos, Vector2 dir, Vector2 vel );
+	Player( Player &other );
+	Player &operator=( Player &other );
 	~Player();
 
 	// ================================ ACCESSORS
-	Camera3D *getCamera();
 
-	void setPosition( Vector3 pos );
-	void moveBy( Vector3 movement );
+	ViewPort *getViewport();
+	Camera2D *getCamera();
 
-	void setTarget( Vector3 target );
-	void setDirection( Vector3 direction );
-	//void turnBy( ? rotation );
+	Vector2 getPosition() const;
+	Vector2 getDirection() const;
+	Vector2 getVelocity() const;
 
-	void setFOV( float fovy );
+	void setPosition( Vector2 pos );
+	void setDirection( Vector2 dir );
+	void setVelocity( Vector2 vel );
 
-	Vector3 getPosition() const;
-	Vector3 getDirection() const;
-	Vector3 getTarget() const;
+	void setViewPortZoom( float zoom );
+
+	void moveBy( Vector2 movement );
+	void moveTowards( Vector2 target );
+
+	void accelerateBy( Vector2 acceleration );
+	void accelerateTowards( Vector2 target );
+
+	void rotateBy( float angle );
+	void rotateTowards( Vector2 target );
+
 
 	// ================================ CORE METHODS
 
-	void update();
+	void updatePosition();
+	void updateDirection();
+	void updateVelocity();
+
+	void updateViewPort();
+
+	void updateSelf();
+	void drawSelf();
+
+	void registerInputs();
 
 };
 
