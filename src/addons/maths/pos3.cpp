@@ -16,7 +16,7 @@ pos3_s getPos3( long v )   { return { ( int )v, ( int )v, ( int )v }; }
 pos3_s getPos3( float v )  { return { ( int )v, ( int )v, ( int )v }; }
 pos3_s getPos3( double v ) { return { ( int )v, ( int )v, ( int )v }; }
 
-pos3_s getRelPosFromSide( side_e side ) { return getRelPosFromDir( (dir_e)side ); }
+pos3_s getRelPosFromSide( side_e side ) { return getRelPosFromDir( ( dir_e )side ); }
 pos3_s getRelPosFromDir( dir_e dir )
 {
 	pos3_s pos = getNullPos3();
@@ -52,7 +52,7 @@ pos3_s getRelPosFromDir( dir_e dir )
 	return pos;
 }
 
-pos3_s getRelPosFromVertex(vertex_e vertex)
+pos3_s getRelPosFromVertex( vertex_e vertex )
 {
 	pos3_s pos = getNullPos3();
 
@@ -447,7 +447,7 @@ pos3_s operator%( const pos3_s &lhs, int rhs )
 pos3_s operator*( float lhs, const pos3_s &rhs) { return rhs * lhs; }
 pos3_s operator*( const pos3_s &lhs, float rhs )
 {
-	pos3_s pos = { int( lhs.x * rhs ), int( lhs.y * rhs ), int( lhs.z * rhs ) };
+	pos3_s pos = { int( lhs.x * rhs ), int( lhs.y * rhs ), int( lhs.z * rhs )};
 	return pos;
 }
 
@@ -463,7 +463,7 @@ pos3_s operator/( const pos3_s &lhs, float rhs )
 pos3_s operator*( double lhs, const pos3_s &rhs ) { return rhs * lhs; }
 pos3_s operator*( const pos3_s &lhs, double rhs )
 {
-	pos3_s pos = { int( lhs.x * rhs ), int( lhs.y * rhs ), int( lhs.z * rhs ) };
+	pos3_s pos = { int( lhs.x * rhs ), int( lhs.y * rhs ), int( lhs.z * rhs )};
 	return pos;
 }
 

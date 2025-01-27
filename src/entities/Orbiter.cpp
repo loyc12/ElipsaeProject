@@ -5,12 +5,12 @@ Orbiter::Orbiter()
 {
 	log( "Orbiter::Orbiter(1)", DEBUG );
 
-	_orbiterPos = { 0, 0, 0 };
+	_orbiterPos = { 0, 0 };
 	_isGenerated = false;
 	_isActivated = false;
 }
 
-Orbiter::Orbiter( pos3_s orbiterPos )
+Orbiter::Orbiter( pos2_s orbiterPos )
 {
 	log( "Orbiter::Orbiter(2)", DEBUG );
 
@@ -46,14 +46,14 @@ Orbiter::~Orbiter()
 // ================================ ACCESSORS
 
 World *Orbiter::getWorld() const { return ( getEngine()->getWorld()); }
-pos3_s Orbiter::getOrbiterPos() const { return _orbiterPos; }
+pos2_s Orbiter::getOrbiterPos() const { return _orbiterPos; }
 
 string Orbiter::getOrbiterPosString()
 {
 	if ( _posStr.empty() )
 	{
 		stringstream ss;
-		ss << "[" << _orbiterPos.x << ":" << _orbiterPos.y << ":" << _orbiterPos.z << "]";
+		ss << "[" << _orbiterPos.x << ":" << _orbiterPos.y << "]";
 		_posStr = ss.str();
 	}
 
@@ -67,11 +67,10 @@ string Orbiter::getOrbiterPosSentence( const char* str )
 	return ss.str();
 }
 
-void Orbiter::setOrbiterPos( int x, int y, int z )
+void Orbiter::setOrbiterPos( int x, int y )
 {
 	_orbiterPos.x = x;
 	_orbiterPos.y = y;
-	_orbiterPos.z = z;
 
 	_posStr.clear();
 }

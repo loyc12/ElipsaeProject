@@ -22,25 +22,25 @@ class World
 	~World();
 
 	// ================================ ACCESSORS
-	Orbiter *getOrbiter( pos3_s orbiterPos );
-	Orbiter *getOrbiter( int x, int y, int z );
+	Orbiter *getOrbiter( pos2_s orbiterPos );
+	Orbiter *getOrbiter( int x, int y );
 
-	bool setOrbiter( pos3_s orbiterPos,   Orbiter *orbiter );
-	bool setOrbiter( int x, int y, int z, Orbiter *orbiter );
+	bool setOrbiter( pos2_s orbiterPos,   Orbiter *orbiter );
+	bool setOrbiter( int x, int y, Orbiter *orbiter );
 
 	// ================================ BOOLEAN METHODS
 
-	bool isVoxelInWorld( pos3_s voxelWorldPos ) const;
-	bool isVoxelInWorld( int x, int y, int z ) const;
+	bool isVoxelInWorld( pos2_s voxelWorldPos ) const;
+	bool isVoxelInWorld( int x, int y ) const;
 
-	bool isOrbiterInWorld( pos3_s OrbiterPos ) const;
-	bool isOrbiterInWorld( int x, int y, int z ) const;
+	bool isOrbiterInWorld( pos2_s OrbiterPos ) const;
+	bool isOrbiterInWorld( int x, int y ) const;
 
-	bool isOrbiterGenerated( pos3_s orbiterPos );
-	bool isOrbiterGenerated( int x, int y, int z );
+	bool isOrbiterGenerated( pos2_s orbiterPos );
+	bool isOrbiterGenerated( int x, int y );
 
-	bool isOrbiterActivated( pos3_s orbiterPos );
-	bool isOrbiterActivated( int x, int y, int z );
+	bool isOrbiterActivated( pos2_s orbiterPos );
+	bool isOrbiterActivated( int x, int y );
 
 	// ================================ CORE METHODS
 
@@ -56,7 +56,7 @@ class World
 	void drawActivatedOrbiters();
 };
 
-Orbiter		 *getWorldOrbiter( pos3_s orbiterPos );
+Orbiter		 *getWorldOrbiter( pos2_s orbiterPos );
 World			 *getEngineWorld();
 
 #endif // WORLD_HPP

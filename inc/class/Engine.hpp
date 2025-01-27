@@ -34,17 +34,17 @@ class Engine
 	Noise *getNoise();
 	Noise *setNoiseSeed( int64_t seed );
 
-	Orbiter *getOrbiterInWorld( pos3_s orbiterPos );
-	Orbiter *getOrbiterInWorld( int x, int y, int z );
+	Orbiter *getOrbiterInWorld( pos2_s orbiterPos );
+	Orbiter *getOrbiterInWorld( int x, int y );
 
-	vox_type_e getVoxelInWorld( pos3_s voxelWorldPos ) const;
-	vox_type_e getVoxelInWorld( int x, int y, int z ) const;
+	vox_type_e getVoxelInWorld( pos2_s voxelWorldPos ) const;
+	vox_type_e getVoxelInWorld( int x, int y ) const;
 
-	bool setOrbiterInWorld( pos3_s orbiterPos, Orbiter *orbiter );
-	bool setOrbiterInWorld( int x, int y, int z, Orbiter *orbiter );
+	bool setOrbiterInWorld( pos2_s orbiterPos, Orbiter *orbiter );
+	bool setOrbiterInWorld( int x, int y, Orbiter *orbiter );
 
-	bool setVoxelInWorld( pos3_s voxelWorldPos, vox_type_e type );
-	bool setVoxelInWorld( int x, int y, int z, vox_type_e type );
+	bool setVoxelInWorld( pos2_s voxelWorldPos, vox_type_e type );
+	bool setVoxelInWorld( int x, int y, vox_type_e type );
 
 	// ================================ BOOLEAN METHODS
 	bool isRunning() const;

@@ -69,6 +69,8 @@ bool isInRect(  pos3_s const &point, pos3_s const &p1, pos3_s const &p2 );
 bool isInCube(  pos3_s const &point, pos3_s const &center, float radius );
 bool isInPrism( pos3_s const &point, pos3_s const &center, float radX, float radY, float radZ );
 
+// bool isInTethraedron( pos3_s const &point, pos3_s const &p1, pos3_s const &p2, pos3_s const &p3, pos3_s const &p4 );
+
 // ================ SPHERICAL VOLUMES
 
 bool isInSphere(   pos3_s const &point, pos3_s const &center, float radius );

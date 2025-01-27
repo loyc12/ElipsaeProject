@@ -57,9 +57,9 @@ Rectangle	ViewPort::getField() const { return _field; }
 Vector2		ViewPort::getCenter() const { return _center; }
 float			ViewPort::getZoom() const { return _zoom; }
 
-void ViewPort::setFieldByCenter( Vector2 pos, Vector2 sizes )
+void ViewPort::setFieldByCenter( Vector2 pos, Vector2 dims )
 {
-	_field = { pos.x - sizes.x / 2, pos.y - sizes.y / 2, sizes.x, sizes.y };
+	_field = { pos.x - dims.x / 2, pos.y - dims.y / 2, dims.x, dims.y };
 }
 
 void ViewPort::setFieldByCorners( Vector2 pos1, Vector2 pos2 )

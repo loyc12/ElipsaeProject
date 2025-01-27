@@ -5,7 +5,7 @@
 # include "./deps.hpp"
 
 
-# include "./struct/pos3.hpp"
+# include "./struct/pos2.hpp"
 
 # include "./class/Orbiter.hpp"
 # include "./class/Engine.hpp"
