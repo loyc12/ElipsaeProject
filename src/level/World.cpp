@@ -35,6 +35,9 @@ void World::spawnOrbiter( float x, float y, Orbiter &orbiter )
 {
 	log( "World::spawnOrbiter()", DEBUG );
 
+	(void)x;
+	(void)y;
+	(void)orbiter;
 	// WIP
 }
 
