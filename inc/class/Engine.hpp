@@ -10,9 +10,10 @@ class Engine
 {
 	private:
 
-	World  *_world;
-	Player *_player;
-	Noise  *_noise;
+	World    *_world;
+	Player   *_player;
+	Camera2D *_camera;
+	Noise    *_noise;
 
 	bool _running;
 
@@ -64,6 +65,7 @@ class Engine
 };
 
 Engine *getEngine(); // Singleton for the engine
+Camera2D *getCamera(); // Singleton for the camera
 
 #endif // ENGINE_HPP
 

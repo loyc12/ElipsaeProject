@@ -22,20 +22,29 @@ ViewPort::ViewPort()
 	_zoom = 1.0f;
 
 	updateField();
-	updateCamera();
+}
+
+ViewPort::ViewPort( Vector2 pos, float zoom )
+{
+	log( "ViewPort::ViewPort(2)", DEBUG );
+
+	_center = pos;
+	_zoom = zoom;
+
+	updateField();
 }
 
 ViewPort::ViewPort( ViewPort &other )
 {
-	_camera = *other.getCamera(); // clones the source camera
 	_field = other.getField();
 	_center = other.getCenter();
 	_zoom = other.getZoom();
 }
 
-ViewPort &ViewPort::operator=( ViewPort &other )
+ViewPort &ViewPort::operator=( const ViewPort &other )
 {
-	_camera = *other.getCamera(); // clones the source camera
+	if ( this == &other ) return *this;
+
 	_field = other.getField();
 	_center = other.getCenter();
 	_zoom = other.getZoom();
@@ -48,11 +57,9 @@ ViewPort::~ViewPort()
 	log( "ViewPort::~ViewPort()", DEBUG );
 }
 
-void	ViewPort::setCamera( Camera2D *camera ) { _camera = *camera; }
 void	ViewPort::setCenter( Vector2 pos ) { _center = pos; }
 void	ViewPort::setZoom( float zoom ) { _zoom = zoom; }
 
-Camera2D	*ViewPort::getCamera() { return &_camera; }
 Rectangle	ViewPort::getField() const { return _field; }
 Vector2		ViewPort::getCenter() const { return _center; }
 float			ViewPort::getZoom() const { return _zoom; }
@@ -73,23 +80,7 @@ void ViewPort::updateField()
 	_field = { _center.x - GetScreenWidth() / _zoom / 2, _center.y - GetScreenHeight() / _zoom / 2, GetScreenWidth() / _zoom, GetScreenHeight() / _zoom };
 }
 
-void ViewPort::updateCamera()
-{
-	_camera.target = { _center.x, _center.y };
-	_camera.rotation = 0.0f;
-	_camera.offset = { 0, 0 };
-	_camera.zoom = _zoom;
-}
-
 void ViewPort::updateSelf()
 {
 	updateField();
-	updateCamera();
-}
-
-void ViewPort::drawFromField()
-{
-	// TODO : draw shit here
-
-	drawInfoBox( &_camera );
 }

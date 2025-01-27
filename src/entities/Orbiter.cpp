@@ -8,33 +8,22 @@ Orbiter::Orbiter()
 	_position = { 0, 0 };
 	_velocity = { 0, 0 };
 
-	_canMove = true;
+
 	_isGenerated = false;
 	_isActivated = false;
+
 }
 
-Orbiter::Orbiter( bool canMove )
+Orbiter::Orbiter( bool canMove ) : Orbiter()
 {
-	log( "Orbiter::Orbiter(2)", DEBUG );
-
-	_position = { 0, 0 };
-	_velocity = { 0, 0 };
-
 	_canMove = canMove;
-	_isGenerated = false;
-	_isActivated = false;
 }
 
-Orbiter::Orbiter( Vector2 position, Vector2 velocity )
+Orbiter::Orbiter( Vector2 pos, Vector2 vel, angle_t rot ) : Orbiter()
 {
-	log( "Orbiter::Orbiter(3)", DEBUG );
-
-	_position = position;
-	_velocity = velocity;
-
-	_canMove = true;
-	_isGenerated = false;
-	_isActivated = false;
+	_position = pos;
+	_velocity = vel;
+	_rotation = rot;
 }
 
 Orbiter::Orbiter( const Orbiter &other )
@@ -75,7 +64,7 @@ Vector2 Orbiter::getPosition() const { return _position; }
 
 string Orbiter::getPosString()
 {
-	if ( _posStr.empty() )
+	if( _posStr.empty() )
 	{
 		stringstream ss;
 		ss << "[" << _position.x << ":" << _position.y << "]";
@@ -106,9 +95,14 @@ Vector2 Orbiter::getVelocity() const { return _velocity; }
 
 string Orbiter::getVelString()
 {
-	stringstream ss;
-	ss << "[" << _velocity.x << ":" << _velocity.y << "]";
-	return ss.str();
+	if( _velStr.empty() )
+	{
+		stringstream ss;
+		ss << "[" << _velocity.x << ":" << _velocity.y << "]";
+		_velStr = ss.str();
+	}
+
+	return _velStr;
 }
 
 string Orbiter::getVelSentence( const char* str )
@@ -122,13 +116,122 @@ void Orbiter::setVelocity( float x, float y )
 {
 	_velocity.x = x;
 	_velocity.y = y;
+
+	_velStr.clear();
 }
 
-// ================ OTHERS
+// ================ ROTATION
+
+angle_t Orbiter::getRotation() const { return _rotation; }
+
+string Orbiter::getRotString()
+{
+	if( _rotStr.empty() )
+	{
+		stringstream ss;
+		ss << "[" << _rotation << "]";
+		_rotStr = ss.str();
+	}
+
+	return _rotStr;
+}
+
+string Orbiter::getRotSentence( const char* str )
+{
+	stringstream ss;
+	ss << "Orbiter " << getPosString() << " : " << str;
+	return ss.str();
+}
+
+void Orbiter::setRotation( angle_t rotation )
+{
+	_rotation = rotation;
+}
+
+// ================================ BOOLEAN METHODS
+
+void Orbiter::setMovability( bool val ) { _canMove = val; }
 
 bool Orbiter::CanMove()     const { return _canMove; }
 bool Orbiter::isGenerated() const { return _isGenerated; }
 bool Orbiter::isActivated() const { return _isActivated; }
+
+// ================================ MOVEMENT
+
+void Orbiter::moveBy( Vector2 movement )
+{
+	_position.x += movement.x;
+	_position.y += movement.y;
+}
+
+void Orbiter::moveTowards( Vector2 target, float dist )
+{
+	(void)target;
+	(void)dist;
+
+	// find normalized vector from position to target
+	// multiply by dist
+	// add to position
+
+	// WIP
+}
+
+void Orbiter::accelerateBy( Vector2 speed )
+{
+	_velocity.x += speed.x;
+	_velocity.y += speed.y;
+}
+
+void Orbiter::accelerateTowards( Vector2 target, float speed )
+{
+	(void)target;
+	(void)speed;
+
+	// find normalized vector from position to target
+	// multiply by speed
+	// add to velocity
+
+	// WIP
+}
+
+void Orbiter::rotateBy( angle_t angle )
+{
+	(void)angle;
+
+	// WIP
+}
+
+void Orbiter::rotateTowards( Vector2 target, angle_t angle )
+{
+	(void)target;
+	(void)angle;
+
+	// find normalized vector from position to target
+	// find shortest rotation angle to that vector
+	// rotate by angle * direction
+
+	// WIP
+}
+
+// ================================ UPDATE METHODS
+
+void Orbiter::updatePosition()
+{
+	_position.x += _velocity.x;
+	_position.y += _velocity.y;
+
+	_posStr.clear();
+}
+
+void Orbiter::updateVelocity()
+{
+	// WIP
+}
+
+void Orbiter::updateRotation()
+{
+	// WIP
+}
 
 // ================================ CORE METHODS
 

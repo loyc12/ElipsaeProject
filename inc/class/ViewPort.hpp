@@ -2,7 +2,6 @@
 # define VIEWPORT_HPP
 
 # include "../deps.hpp"
-# include "../class/Orbiter.hpp"
 
 
 #define BKGRND { 32, 32, 32, 255 }
@@ -14,7 +13,6 @@ void drawInfoBox( Camera2D *camera );
 class ViewPort
 {
 	private:
-		Camera2D	_camera;
 		Rectangle	_field;
 		Vector2		_center;
 		float			_zoom;
@@ -24,21 +22,19 @@ class ViewPort
 
 	public:
 		ViewPort();
+		ViewPort( Vector2 pos, float zoom );
 		ViewPort( ViewPort &other );
-		ViewPort &operator=( ViewPort &other );
+		ViewPort &operator=( const ViewPort &other );
 		~ViewPort();
 
-		void setCamera( Camera2D *camera );
 		void setCenter( Vector2 pos );
 		void setZoom( float zoom );
 
-		Camera2D	*getCamera();
-		Rectangle	getField() const;
-		Vector2		getCenter() const;
-		float			getZoom() const;
+		Rectangle	getField()   const;
+		Vector2		getCenter()  const;
+		float			getZoom()    const;
 
 		void updateField();
-		void updateCamera();
 		void updateSelf();
 
 		void drawFromField();

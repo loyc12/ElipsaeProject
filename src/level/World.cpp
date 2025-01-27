@@ -1,5 +1,6 @@
 #include "../../inc/class/World.hpp"
 #include "../../inc/class/Engine.hpp"
+#include <raylib.h>
 
 World *getEngineWorld() { return getEngine()->getWorld(); }
 
@@ -71,6 +72,8 @@ void World::deactivateOrbiters()
 void World::drawActivatedOrbiters()
 {
 	//log( "World::drawActivatedOrbiters()", DEBUG );
+
+	//Camera2D *camera = getCamera();
 
 	// WIP
 }

@@ -1,4 +1,5 @@
 #include "../inc/class/Engine.hpp"
+#include <raylib.h>
 
 Engine *getEngine()
 {
@@ -13,19 +14,29 @@ Engine *getEngine()
 	return ng;
 }
 
+Camera2D *getCamera()
+{
+	return getEngine()->getCamera();
+}
+
 Engine::Engine()
 {
 	log( "Engine::Engine(1)", INFO );
-	_world = new World();
+	_world  = new World();
 	_player = new Player();
+	_camera = nullptr;
+	_noise  = nullptr;
+
 	this->_running = false;
 }
 
 Engine::Engine( World &world, Player &player )
 {
 	log( "Engine::Engine(2)", INFO );
+
 	_world = &world;
 	_player = &player;
+
 	this->_running = false;
 }
 
@@ -33,23 +44,36 @@ Engine::~Engine()
 {
 	log( "Engine::~Engine()", INFO );
 
-	if ( _world != nullptr )  { delete _world; }
+	if ( _world  != nullptr ) { delete _world; }
 	if ( _player != nullptr ) { delete _player; }
-	if ( _noise != nullptr )  { delete _noise; }
+	if ( _noise  != nullptr ) { delete _noise; }
+	if ( _camera != nullptr ) { delete _camera; }
 }
 
 // ================================ ACCESSORS
 
-World *Engine::getWorld() { return _world; }
-
+World  *Engine::getWorld()  { return _world; }
 Player *Engine::getPlayer() { return _player; }
-Camera2D *Engine::getCamera() { return _player->getCamera(); }
+
+Camera2D *Engine::getCamera()
+{
+	if ( _camera == nullptr )
+	{
+		log( "No camera provided, creating default camera", WARN );
+		_camera = new Camera2D();
+		_camera->target = { 0, 0 };
+		_camera->offset = { 0, 0 };
+		_camera->rotation = 0.0f;
+		_camera->zoom = 1.0f;
+	}
+	return _camera;
+}
 
 Noise *Engine::getNoise()
 {
 	if ( _noise == nullptr )
 	{
-		log( "No seed provided for noise, using default seed.", WARN );
+		log( "No seed provided for noise, using default seed", WARN );
 		_noise = new Noise();
 	}
 	return _noise;
@@ -145,9 +169,9 @@ void Engine::render()
 	{
 		ClearBackground( BKGRND );
 
-		_world->drawActivatedOrbiters();
+		//_world->drawActivatedOrbiters();
 
-		drawInfoBox( getCamera() ); // NOTE : TEMP
+		drawInfoBox( getCamera() );
 	}
 	EndDrawing();
 }
