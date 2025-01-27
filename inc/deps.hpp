@@ -13,11 +13,12 @@
 # include "./def/direction.hpp"
 # include "./def/math.hpp"
 # include "./def/noise.hpp"
+# include "./def/numTypes.hpp"
 # include "./def/physics.hpp"
 # include "./def/raycast.hpp"
 # include "./def/screen.hpp"
 
-# define LOG_LVL		DEBUG
+# define LOG_LVL	DEBUG
 
 #endif // CORE_HPP
 

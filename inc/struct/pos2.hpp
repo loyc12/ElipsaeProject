@@ -1,6 +1,7 @@
 #ifndef POS2_HPP
 # define POS2_HPP
 
+# include "../libs.hpp"
 # include "../def/direction.hpp"
 
 typedef struct

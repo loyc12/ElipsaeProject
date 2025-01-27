@@ -5,32 +5,54 @@ Orbiter::Orbiter()
 {
 	log( "Orbiter::Orbiter(1)", DEBUG );
 
-	_orbiterPos = { 0, 0 };
+	_position = { 0, 0 };
+	_velocity = { 0, 0 };
+
+	_canMove = true;
 	_isGenerated = false;
 	_isActivated = false;
 }
 
-Orbiter::Orbiter( Vector2 orbiterPos )
+Orbiter::Orbiter( bool canMove )
 {
 	log( "Orbiter::Orbiter(2)", DEBUG );
 
-	_orbiterPos = orbiterPos;
+	_position = { 0, 0 };
+	_velocity = { 0, 0 };
+
+	_canMove = canMove;
+	_isGenerated = false;
+	_isActivated = false;
+}
+
+Orbiter::Orbiter( Vector2 position, Vector2 velocity )
+{
+	log( "Orbiter::Orbiter(3)", DEBUG );
+
+	_position = position;
+	_velocity = velocity;
+
+	_canMove = true;
 	_isGenerated = false;
 	_isActivated = false;
 }
 
 Orbiter::Orbiter( const Orbiter &other )
 {
-	_orbiterPos = other.getOrbiterPos();
+	_position = other.getPosition();
+	_velocity = other.getVelocity();
 
+	_canMove = other.CanMove();
 	_isGenerated = other.isGenerated();
 	_isActivated = other.isActivated();
 }
 
 Orbiter &Orbiter::operator=( const Orbiter &other )
 {
-	_orbiterPos = other.getOrbiterPos();
+	_position = other.getPosition();
+	_velocity = other.getVelocity();
 
+	_canMove = other.CanMove();
 	_isGenerated = other.isGenerated();
 	_isActivated = other.isActivated();
 
@@ -39,44 +61,72 @@ Orbiter &Orbiter::operator=( const Orbiter &other )
 
 Orbiter::~Orbiter()
 {
-	log( getOrbiterPosSentence( "Orbiter::~Orbiter()" ).c_str(), DEBUG );
+	log( getPosSentence( "Orbiter::~Orbiter()" ).c_str(), DEBUG );
 	//if ( _orbiterMesh ) delete _orbiterMesh; // TMP
 }
 
 // ================================ ACCESSORS
 
 World *Orbiter::getWorld() const { return ( getEngine()->getWorld()); }
-Vector2 Orbiter::getOrbiterPos() const { return _orbiterPos; }
 
-string Orbiter::getOrbiterPosString()
+// ================ POSITION
+
+Vector2 Orbiter::getPosition() const { return _position; }
+
+string Orbiter::getPosString()
 {
 	if ( _posStr.empty() )
 	{
 		stringstream ss;
-		ss << "[" << _orbiterPos.x << ":" << _orbiterPos.y << "]";
+		ss << "[" << _position.x << ":" << _position.y << "]";
 		_posStr = ss.str();
 	}
 
 	return _posStr;
 }
 
-string Orbiter::getOrbiterPosSentence( const char* str )
+string Orbiter::getPosSentence( const char* str )
 {
 	stringstream ss;
-	ss << "Orbiter " << getOrbiterPosString() << " : " << str;
+	ss << "Orbiter " << getPosString() << " : " << str;
 	return ss.str();
 }
 
-void Orbiter::setOrbiterPos( int x, int y )
+void Orbiter::setPosition( float x, float y )
 {
-	_orbiterPos.x = x;
-	_orbiterPos.y = y;
+	_position.x = x;
+	_position.y = y;
 
 	_posStr.clear();
 }
 
+// ================ VELOCITY
 
+Vector2 Orbiter::getVelocity() const { return _velocity; }
 
+string Orbiter::getVelString()
+{
+	stringstream ss;
+	ss << "[" << _velocity.x << ":" << _velocity.y << "]";
+	return ss.str();
+}
+
+string Orbiter::getVelSentence( const char* str )
+{
+	stringstream ss;
+	ss << "Orbiter " << getPosString() << " : " << str;
+	return ss.str();
+}
+
+void Orbiter::setVelocity( float x, float y )
+{
+	_velocity.x = x;
+	_velocity.y = y;
+}
+
+// ================ OTHERS
+
+bool Orbiter::CanMove()     const { return _canMove; }
 bool Orbiter::isGenerated() const { return _isGenerated; }
 bool Orbiter::isActivated() const { return _isActivated; }
 
@@ -94,7 +144,7 @@ bool Orbiter::initiate()
 		}
 	}
 
-	log( getOrbiterPosSentence( "Orbiter::initiate() failed" ).c_str(), WARN );
+	log( getPosSentence( "Orbiter::initiate() failed" ).c_str(), WARN );
 
 	return false;
 }
@@ -104,10 +154,10 @@ bool Orbiter::generate()
 
 	if ( _isGenerated )
 	{
-		log( getOrbiterPosSentence( "Orbiter already generated" ).c_str(), WARN );
+		log( getPosSentence( "Orbiter already generated" ).c_str(), WARN );
 		return true;
 	}
-	log( getOrbiterPosSentence( "Orbiter::generate()" ).c_str(), DEBUG );
+	log( getPosSentence( "Orbiter::generate()" ).c_str(), DEBUG );
 
 	// Generate the relevant OrbiterData here
 
@@ -120,7 +170,7 @@ bool Orbiter::activate()
 {
 	if ( !_isGenerated )
 	{
-		log( getOrbiterPosSentence( "Orbiter not yet generated" ).c_str(), WARN );
+		log( getPosSentence( "Orbiter not yet generated" ).c_str(), WARN );
 		return false;
 	}
 

@@ -2,7 +2,7 @@ Style
 	- Put colour into the makefile messages
 
 Performance
-	- Make a scale_t datatype to store a value between 0
-	x Make a fixed_t datatype to store non interger coords more efficiently than floats
-	- Make a rot_t datatype to store rotation in degrees or radiants
 	- Improve the performance of log() / get_time_str()
+	- Use fixed_t instead of floats
+	- Use angle_t
+	- Use scalar_t instead of floats

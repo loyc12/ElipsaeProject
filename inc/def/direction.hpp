@@ -1,5 +1,5 @@
-#ifndef COORD_HPP
-# define COORD_HPP
+#ifndef DIRECTION_HPP
+# define DIRECTION_HPP
 
 # include "../libs.hpp"
 
@@ -64,4 +64,4 @@ typedef enum : byte_t
 
 } vertex_e;
 
-#endif // COORD_HPP
+#endif // DIRECTION_HPP
