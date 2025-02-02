@@ -11,13 +11,9 @@ Orbiter::Orbiter()
 
 	_isGenerated = false;
 	_isActivated = false;
-
 }
 
-Orbiter::Orbiter( bool canMove ) : Orbiter()
-{
-	_canMove = canMove;
-}
+Orbiter::Orbiter( bool canMove ) : Orbiter() { _canMove = canMove; }
 
 Orbiter::Orbiter( Vector2 pos, Vector2 vel, angle_t rot ) : Orbiter()
 {
@@ -51,7 +47,6 @@ Orbiter &Orbiter::operator=( const Orbiter &other )
 Orbiter::~Orbiter()
 {
 	log( getPosSentence( "Orbiter::~Orbiter()" ).c_str(), DEBUG );
-	//if ( _orbiterMesh ) delete _orbiterMesh; // TMP
 }
 
 // ================================ ACCESSORS

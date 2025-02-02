@@ -1,5 +1,4 @@
 #include "../inc/class/Engine.hpp"
-#include <raylib.h>
 
 Engine *getEngine()
 {

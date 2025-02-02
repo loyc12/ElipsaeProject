@@ -6,7 +6,7 @@ void	drawInfoBox( Camera2D *camera )
 	static int box_x = 5;
 	static int box_y = 5;
 	static int box_width = 420;
-	static int box_height = ( int )(( 1.0f + line_count ) * DEBUG_FONT_SIZE);
+	static int box_height = ( int )(( 1.0f + line_count ) * DEBUG_FONT_SIZE );
 
 	DrawRectangle(      box_x, box_y, box_width, box_height, Fade( GREEN, 0.5f ));
 	DrawRectangleLines( box_x, box_y, box_width, box_height, BLACK );
